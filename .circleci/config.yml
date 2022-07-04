@@ -13,9 +13,9 @@ jobs:
       - run: echo World!
 
 workflows:
-  say-hello-workflow:
+  hello-world-workflow:
     jobs:
-      - print-hello
-      - print-world:
+      - print_hello
+      - print_world:
           requires:
-            - print-hello
+            - print_hello
