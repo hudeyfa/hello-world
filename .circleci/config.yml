@@ -21,7 +21,7 @@ jobs:
 
   smoke_test:
     docker:
-      image: alpine:latest
+      - image: alpine:latest
     steps:
       - run: 
           name: "Install cURL"
