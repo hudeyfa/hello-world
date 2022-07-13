@@ -19,6 +19,25 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
 
+  smoke_test:
+    docker:
+      image: alpine:latest
+    steps:
+      - run: 
+          name: "Install cURL"
+          command: apk add --update curl
+      - run: 
+          name: "Smoke Test"
+          command: |
+            URL="https://blog.udacity.com/"
+            # Test if website is responsive
+            if curl -s --head ${URL} 
+            then
+              return 0
+            else
+              return 1
+            fi
+
 workflows:
   hello-world-workflow:
     jobs:
@@ -26,3 +45,6 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - smoke_test: 
+          requires:
+            - print_output_file
